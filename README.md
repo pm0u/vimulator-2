@@ -1,10 +1,13 @@
-~~## 1. Minesweeper~~
+## Vimulator 2: Judgement Day
+Vimulator was my Q1 project and I think it could be adapted to be a useful teaching tool that is supported by the community using it.
 
-~~This would be a webpage that is similar to/a clone of the classic minesweeper game. There are other HTML/CSS minesweeper clones around, most of them employ tables or images to accomplish the board. I would like to create a minesweeper clone written in pure CSS grid, without using tables or images (so that it is light). The logic would be handled in javascript and layout in CSS/CSS grid/HTML. An additional challenge could be a different style game, where minesweeper is merged with a tile sliding style game and you are able to move 3x3 squares of tiles around the board. These would respond to their new location and display numbers of bordering mines as they are moved. Local storage will be used to record name and high scores.~~
+Vim is a console based text editor that uses advanced keyboard shortcuts to increase efficiency. Most people within software development will encounter Vim at some point, usually inadvertently, and be stuck not knowing how it works. Additionally, these shortcuts help promote good typing habits and are available across a wide range of applications and text editors to keep key functionality consistent across multiple applications. Vimulator will help to educate and train users in Vim's keyboard shortcuts and functionality, thereby removing the large wall that exists when being overwhelmed by the extreme possibilities.
 
-## 2. Vim tutor
+This update to Vimulator would maintain the same structure and functionality as the original prototype. I would like to use minimal frameworks to keep the app usable and accessible on many different browsers, OSs, and aging computers. I think that developing Vimulator in this way can present a unique opportunity to explore object oriented programming. The structure I see now includes a Vim engine that will internally manage the state of the vim application, a self written "front end framework" that will update the HTML from user input, and an input manager that will handle what happens when a user presses a specific key. There may be a need for a state management system such as redux that would take over storing the state of the Vim engine and user interface among other things.
 
-This would be a vim shortcut tutor similar to CSS diner that would help to teach vim shortcuts/commands. It would offer text content (single or multi line) and ask the user to accomplish a task on the content. It could start with simple things (exiting vim!!) and move to more advanced uses such as registers, search and replace, etc. There are other vim tutors around, but I don't believe they offer enough repetition. Also, asking the user to save/quit their changes at the end of every level will help reinforce some of the most important shortcuts. It will be open source and if i make it simple to script lessons, long term it would be great if people contributed additional lessons to expand the game (through pull requests on github). Local storage will be employed to record username and completed levels so that the game can be picked back up when the page is revisited. An endurance mode would be great, that would throw random levels at the user to reinforce what has been learned. Logic in javascript, layout and content in CSS grid and HTML.
+To include a back end, lessons could be stored on an external database and be accessed as needed. A stretch feature would be the ability to import lessons from something like a github repo so that community members could write tutorials and lessons side by side.
+
+As an open source project, Vimulator can also serve as a teaching tool to help people break into contributing to open source software as well as an example of well written code to reference.
 
 ### Project Planning
 
@@ -23,4 +26,4 @@ I would like the website to mimic the look of vim in the terminal as much as pos
 
 The current proof of concept is live at http://vimulator.surge.sh/html/index.html
 
-there is admittedly still a lot to be done to make it efficient and viable.
+For my Q4 project, I will be completely refactoring and re-writing the original codebase to be more performant, testable, and include more functionality.
