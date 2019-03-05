@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   let hintToggle = document.getElementById('hint-toggle')
   let lessonToggle = document.getElementById('lesson-toggle')
   let darkMode = document.getElementById('change-colors')
-  let colorsStylesheet = document.getElementById('colors-stylesheet')
 
   hintToggle.addEventListener('click', toggleDiv)
   lessonToggle.addEventListener('click', toggleDiv)
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   unit1.initLesson()
 
-});
+})
 
 function doLesson2(event) {
   unit1.changeLesson(1)
@@ -116,12 +115,10 @@ function toggleDiv(event) {
     let darkMode = document.getElementById('change-colors')
     let localStorage = window.localStorage
     if (colorsStylesheet.href.includes('sol-light.css')) {
-      console.log('dark mode');
       darkMode.innerText = 'light mode'
       colorsStylesheet.href = 'sol-dark.css'
       localStorage.setItem('$colors', 'dark')
     } else {
-      console.log('light mode');
       darkMode.innerText = 'dark mode'
       colorsStylesheet.href = 'sol-light.css'
       localStorage.setItem('$colors', 'light')
