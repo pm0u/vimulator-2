@@ -348,3 +348,5 @@ const vim = {
     lineNosDiv.innerHTML = newText.join('<br>')
   }
 }
+
+export default vim
