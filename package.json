@@ -1,13 +1,13 @@
 {
-  "name": "Q1-proj-vimdicator",
+  "name": "Vimulator",
   "version": "1.0.0",
-  "description": "~~## 1. Minesweeper~~",
+  "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "nyc mocha"
+    "test": "nyc mocha --require @babel/register"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,11 @@
   "homepage": "https://github.com/pm0u/Q1-proj-vimdicator#readme",
   "dependencies": {},
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
     "mocha": "^6.0.2",
     "nyc": "^13.3.0"

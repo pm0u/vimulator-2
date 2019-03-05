@@ -18,10 +18,12 @@
 //    queries current lesson, cursor position, etc to draw window
 //    any decisions about how to display happen here
 
-import View from './View/view'
+import View from './View/View'
 
 const Vim = {
-  cursorMove(key) {
+  cursorPos: [0,0],
+  furthestCol: 0,
+  cursorMove: (key) => {
     let activeLesson = unit1.lessons[this.currLesson]
     this.cursorMover(key)
     this.writeToTextArea(this.genHTML(this.currLesson))
@@ -30,7 +32,7 @@ const Vim = {
       this.finishNotice()
     }
   },
-  findFirstNonEmpty(lesson) {
+  findFirstNonEmpty: (lesson) => {
     let currLine = lesson.lessonText[lesson.cRow]
     return currLine.search(/\S/)
 
