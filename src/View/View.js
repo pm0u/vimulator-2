@@ -1,7 +1,5 @@
-import Vim from '../vim'
-
-const View = {
-    genHTML(lessonNum = 0) {
+function View () {
+    this.genHTML = (lessonNum = 0) => {
         let lesson = this.lessons[lessonNum]
         let spanPreLineNo = '<span class="line-no">'
         let spanPre = '<span class="mode-normal-cursor">'
@@ -16,10 +14,10 @@ const View = {
         }
         this.addLineNos(newText)
         return newText.join('<br>')
-    },
+    }
 
-    promptForSave() {
-        vim.removePopUp()
+    this.promptForSave = () => {
+        this.removePopUp()
         let promptHTML = document.createElement('div')
         promptHTML.className = 'pop-up-contents'
 
@@ -58,8 +56,8 @@ const View = {
         promptHTML.appendChild(saveForm)
 
         this.popUp(promptHTML)
-    },
-    promptForUpdate() {
+    }
+    this.promptForUpdate = () => {
         this.removePopUp()
         let vimStorage = window.localStorage
         let promptHTML = document.createElement('div')
@@ -104,29 +102,28 @@ const View = {
         promptHTML.appendChild(loadForm)
 
         this.popUp(promptHTML)
-
-    },
-    writeToTextArea(html) {
+    }
+    this.writeToTextArea = (html) => {
         let vimText = document.getElementById('vim-text')
         vimText.innerHTML = html
-    },
-    updateCursorPosDisplay(row, col) {
+    }
+    this.updateCursorPosDisplay = (row, col) => {
         let posDiv = document.getElementById('pos-div')
         posDiv.innerText = `${row+1},${col+1}`
-    },
-    setHints() {
+    }
+    this.setHints = () => {
         let hintsDiv = document.getElementById('hints-content')
         hintsDiv.innerHTML = unit1.lessons[this.currLesson].hints
-    },
-    finishNotice() {
+    }
+    this.finishNotice = () => {
         finishElement = document.createElement('div')
         finishElement.className = 'pop-up-contents'
         finishElement.innerHTML = '<h3>Lesson Complete!</h3><p>great job! press <span class=\'emph\'>r</span> to restart this lesson or <span class=\'emph\'>enter</span> to start the next lesson</p>'
         this.popUp(finishElement)
         this.finishKeyListenerActive = true
         document.addEventListener('keypress', unit1.finishNoticeKeyListener)
-    },
-    popUp(element) {
+    }
+    this.popUp = (element) => {
         let popUpDiv = document.createElement('div')
         let vimContent = document.getElementById('vim-content')
         let vimBox = document.getElementById('vim-box')
@@ -139,8 +136,8 @@ const View = {
         if (vimText.innerText.match('.+')) {
             unit1.lessons[this.currLesson].killKeys()
         }
-    },
-    removePopUp() {
+    }
+    this.removePopUp = () => {
         let vimContent = document.getElementById('vim-content')
         let vimText = document.getElementById('vim-text')
         let vimBox = document.getElementById('vim-box')
@@ -151,8 +148,8 @@ const View = {
         if (vimContent.classList.contains('blur')) {
             vimContent.classList.remove('blur')
         }
-    },
-    addLineNos(text) {
+    }
+    this.addLineNos = (text) =>  {
         let spanPre = '<span class="line-no">'
         let spanPost = '</span>'
         let lineNosDiv = document.getElementById('line-nos')
@@ -162,6 +159,73 @@ const View = {
             newText.push(`${spanPre}${i+1}${spanPost}`)
         }
         lineNosDiv.innerHTML = newText.join('<br>')
+    }
+    this.toggleDiv = (event) => {
+        event.target.blur()
+        let divClicked = event.target
+        let divClickedId = event.target.id
+        let lessonDiv = document.getElementById('lessons')
+        let hintDiv = document.getElementById('hints')
+        let body = document.querySelector('body')
+        let noneShowing = '"header header header" "vim vim vim" "footer footer footer"'
+        let lessonsShowing = '"header header header" "lessons vim vim" "footer footer footer"'
+        let hintsShowing = '"header header header" "vim vim hints" "footer footer footer"'
+        let allShowing = '"header header header" "lessons vim hints" "footer footer footer"'
+        if (divClickedId === 'lesson-toggle') {
+            if (lessonDiv.style.visibility === 'visible' || lessonDiv.style.visibility === '') {
+                lessonDiv.style.visibility = 'hidden'
+                if (hintDiv.style.visibility === 'hidden') {
+                    body.style.gridTemplateAreas = noneShowing
+                } else {
+                    body.style.gridTemplateAreas = hintsShowing
+                }
+            } else {
+                lessonDiv.style.visibility = 'visible'
+                if (hintDiv.style.visibility === 'hidden') {
+                    body.style.gridTemplateAreas = lessonsShowing
+                } else {
+                    body.style.gridTemplateAreas = allShowing
+                }
+            }
+        } else {
+            if (hintDiv.style.visibility === 'visible' || hintDiv.style.visibility === '') {
+                hintDiv.style.visibility = 'hidden'
+                if (lessonDiv.style.visibility === 'hidden') {
+                    body.style.gridTemplateAreas = noneShowing
+                } else {
+                    body.style.gridTemplateAreas = lessonsShowing
+                }
+            } else {
+                hintDiv.style.visibility = 'visible'
+                if (lessonDiv.style.visibility === 'hidden') {
+                    body.style.gridTemplateAreas = hintsShowing
+                } else {
+                    body.style.gridTemplateAreas = allShowing
+                }
+            }
+        }
+    }
+    this.changeColors = (colors) => {
+        let colorsStylesheet = document.getElementById('colors-stylesheet')
+        let darkMode = document.getElementById('change-colors')
+        let localStorage = window.localStorage
+        if (colorsStylesheet.href.includes('sol-light.css')) {
+            darkMode.innerText = 'light mode'
+            colorsStylesheet.href = 'sol-dark.css'
+            localStorage.setItem('$colors', 'dark')
+        } else {
+            darkMode.innerText = 'dark mode'
+            colorsStylesheet.href = 'sol-light.css'
+            localStorage.setItem('$colors', 'light')
+        }
+    }
+    this.checkForColors = () => {
+        let localStorage = window.localStorage
+
+        if (localStorage['$colors'] === 'dark') {
+            this.changeColors()
+        }
+
     }
 }
 
