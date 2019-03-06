@@ -20,23 +20,28 @@
 
 import View from './View/View'
 
-const Vim = {
-  cursorPos: [0,0],
-  furthestCol: 0,
-  cursorMove: (key) => {
-    let activeLesson = unit1.lessons[this.currLesson]
-    this.cursorMover(key)
-    this.writeToTextArea(this.genHTML(this.currLesson))
-    this.updateCursorPosDisplay(activeLesson.cRow, activeLesson.cCol)
-    if (this.finisher()) {
-      this.finishNotice()
-    }
-  },
-  findFirstNonEmpty: (lesson) => {
-    let currLine = lesson.lessonText[lesson.cRow]
-    return currLine.search(/\S/)
-
-  },
+function Vim (instance = {}) {
+  let cursorPos = instance.cursorPos || [0,0] 
+  let furthestCol = 0
+  const changeCol = (amount) => {
+    cursorPos[0] += amount
+  }
+  const changeRow = (amount) => {
+    cursorPos[1] += amount
+  }
+  const getCursorPos = () => {
+    return cursorPos
+  }
+  const getFurthestCol = () => {
+    return furthestCol
+  }
+  return Object.assign(this,instance,{
+    changeCol,
+    changeRow,
+    getCursorPos,
+    getFurthestCol
+  })
 }
+
 
 export default Vim

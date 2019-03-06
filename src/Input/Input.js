@@ -1,6 +1,5 @@
 const Input = {
-
-    finishNoticeKeyListener(event) {
+    finishNoticeKeyListener: (event) => {
         switch (event.key) {
             case 'Enter':
                 unit1.nextLesson()
@@ -10,7 +9,7 @@ const Input = {
                 break
         }
     },
-    cursorMover(key) {
+    cursorMover: (key) => {
         // this needs to be refactored to separate concerns
         // between vim.js and this
         // only handle directing keys to appropriate mode file
@@ -66,7 +65,8 @@ const Input = {
                 break
             case 'E':
                 break
-
         }
-    },
+    }
 }
+
+export default Input

@@ -15,7 +15,7 @@ body {
   grid-template-areas: 'header header header'
     'lessons vim hints'
     'footer footer footer';
-  grid-template-columns: 200px minmax(300px, 1fr) minmax(300px, 400px);
+  grid-template-columns: 300px minmax(300px, 1fr) minmax(300px, 400px);
   grid-template-rows: min-content 1fr min-content;
   grid-auto-rows: 0px;
   grid-auto-columns: 0px;

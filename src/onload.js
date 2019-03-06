@@ -1,56 +1,7 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-
-  checkForColors()
-
-  let vimText = document.getElementById('vim-text')
-
-  let lesson1 = document.getElementById('u1l1')
-  let lesson2 = document.getElementById('u1l2')
-  let lesson3 = document.getElementById('u1l3')
-  let lesson4 = document.getElementById('u1l4')
-
-  let save = document.getElementById('save')
-  let resetLesson = document.getElementById('reset')
-  let load = document.getElementById('load')
-  let hintToggle = document.getElementById('hint-toggle')
-  let lessonToggle = document.getElementById('lesson-toggle')
-  let darkMode = document.getElementById('change-colors')
-
-  hintToggle.addEventListener('click', toggleDiv)
-  lessonToggle.addEventListener('click', toggleDiv)
-  lesson1.addEventListener('click', doLesson1)
-  lesson2.addEventListener('click', doLesson2)
-  lesson3.addEventListener('click', doLesson3)
-  lesson4.addEventListener('click', doLesson4)
-  save.addEventListener('click', saveEntry)
-  load.addEventListener('click', loadEntry)
-  resetLesson.addEventListener('click', reset)
-  darkMode.addEventListener('click', changeColors)
-
-  unit1.initLesson()
-
-})
-
-function doLesson2(event) {
-  unit1.changeLesson(1)
-  event.target.blur()
-
-}
-
-function doLesson1(event) {
-  unit1.changeLesson(0)
-  event.target.blur()
-}
-
-function doLesson3(event) {
-  unit1.changeLesson(2)
-  event.target.blur()
-}
-
-function doLesson4(event) {
-  unit1.changeLesson(3)
-  event.target.blur()
-}
+import { lessonListMaker, hintMaker } from './Lesson/lessonPopulator.js'
+import {
+  unit1
+} from './units.js'
 
 function saveEntry() {
   unit1.promptForSave()
@@ -110,20 +61,20 @@ function toggleDiv(event) {
   }
 }
 
-  function changeColors(colors) {
-    let colorsStylesheet = document.getElementById('colors-stylesheet')
-    let darkMode = document.getElementById('change-colors')
-    let localStorage = window.localStorage
-    if (colorsStylesheet.href.includes('sol-light.css')) {
-      darkMode.innerText = 'light mode'
-      colorsStylesheet.href = 'sol-dark.css'
-      localStorage.setItem('$colors', 'dark')
-    } else {
-      darkMode.innerText = 'dark mode'
-      colorsStylesheet.href = 'sol-light.css'
-      localStorage.setItem('$colors', 'light')
-    }
+function changeColors(colors) {
+  let colorsStylesheet = document.getElementById('colors-stylesheet')
+  let darkMode = document.getElementById('change-colors')
+  let localStorage = window.localStorage
+  if (colorsStylesheet.href.includes('sol-light.css')) {
+    darkMode.innerText = 'light mode'
+    colorsStylesheet.href = 'sol-dark.css'
+    localStorage.setItem('$colors', 'dark')
+  } else {
+    darkMode.innerText = 'dark mode'
+    colorsStylesheet.href = 'sol-light.css'
+    localStorage.setItem('$colors', 'light')
   }
+}
 
 function checkForColors() {
   let localStorage = window.localStorage
@@ -133,3 +84,25 @@ function checkForColors() {
   }
 
 }
+
+checkForColors()
+
+const lessonList = document.getElementById('lessons')
+lessonList.appendChild(lessonListMaker(unit1))
+
+const hints = document.getElementById('hints-content')
+hints.appendChild(hintMaker(unit1.lessons[0]))
+
+let save = document.getElementById('save')
+let resetLesson = document.getElementById('reset')
+let load = document.getElementById('load')
+let hintToggle = document.getElementById('hint-toggle')
+let lessonToggle = document.getElementById('lesson-toggle')
+let darkMode = document.getElementById('change-colors')
+
+hintToggle.addEventListener('click', toggleDiv)
+lessonToggle.addEventListener('click', toggleDiv)
+save.addEventListener('click', saveEntry)
+load.addEventListener('click', loadEntry)
+resetLesson.addEventListener('click', reset)
+darkMode.addEventListener('click', changeColors)
