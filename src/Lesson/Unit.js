@@ -1,7 +1,9 @@
+import Lesson from './Lesson.js'
+
 class Unit {
     constructor(unit, currLesson = 0) {
         this.name = unit.name
-        this.lessons = unit.lessons
+        this.lessons = this.makeLessons(unit.lessons)
         this.currLessonNum = currLesson
         this.currLesson = this.lessons[this.currLessonNum]
         this.lessonListMaker = this.lessonListMaker.bind(this)
@@ -62,6 +64,13 @@ class Unit {
         hintDiv.appendChild(resources)
 
         return hintDiv
+    }
+    makeLessons(lessons) {
+        let lessonList = []
+        for (let lesson of lessons) {
+            lessonList.push(new Lesson(lesson))
+        }
+        return lessonList
     }
 }
 

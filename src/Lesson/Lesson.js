@@ -1,13 +1,16 @@
-import Vim from '../vim'
-import View from '../View/view'
-
 class Lesson {
-    constructor({id, name, finishCond, lessonText, hints}) {
+    constructor({
+        id,
+        name,
+        finishCond,
+        lessonText,
+        hints
+    }) {
         this.id = id
         this.name = name
         this.finishCond = finishCond
         this.lessonText = lessonText,
-        this.hints = hints
+            this.hints = hints
     }
     recursiveUpdater(object, storageObj) {
         // used to update lesson state from local storage
@@ -63,3 +66,5 @@ class Lesson {
         this.initLesson()
     }
 }
+
+export default Lesson
