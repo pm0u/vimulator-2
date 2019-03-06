@@ -2,6 +2,7 @@ import { lessonListMaker, hintMaker } from './Lesson/lessonPopulator.js'
 import {
   unit1
 } from './units.js'
+import Unit from './Lesson/Unit.js';
 
 function saveEntry() {
   unit1.promptForSave()
@@ -87,11 +88,13 @@ function checkForColors() {
 
 checkForColors()
 
+const unit = new Unit(unit1)
+
 const lessonList = document.getElementById('lessons')
-lessonList.appendChild(lessonListMaker(unit1))
+lessonList.appendChild(unit.lessonListMaker())
 
 const hints = document.getElementById('hints-content')
-hints.appendChild(hintMaker(unit1.lessons[0]))
+hints.appendChild(unit.hintMaker())
 
 let save = document.getElementById('save')
 let resetLesson = document.getElementById('reset')
