@@ -1,34 +1,22 @@
-import { lessonListMaker, hintMaker } from './Lesson/lessonPopulator.js'
 import {
   unit1
 } from './units.js'
-import Unit from './Lesson/Unit.js';
 import View from './View/View.js'
+import Curriculum from './Curriculum/Curriculum.js'
 
 const view = new View()
-
-function saveEntry() {
-  unit1.promptForSave()
-}
-
-function loadEntry() {
-  unit1.promptForUpdate()
-}
 
 function reset() {
   unit1.resetLesson()
 }
 
+const curriculum = new Curriculum([unit1])
 
 view.checkForColors()
+view.setCurriculum(curriculum.curriculumListMaker())
+view.setHints(curriculum.currLesson)
 
-const unit = new Unit(unit1)
 
-const lessonList = document.getElementById('lessons')
-lessonList.appendChild(unit.lessonListMaker())
-
-const hints = document.getElementById('hints-content')
-hints.appendChild(unit.hintMaker())
 
 let save = document.getElementById('save')
 let resetLesson = document.getElementById('reset')

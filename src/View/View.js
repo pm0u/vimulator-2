@@ -1,4 +1,4 @@
-function View () {
+function View() {
     this.genHTML = (lessonNum = 0) => {
         let lesson = this.lessons[lessonNum]
         let spanPreLineNo = '<span class="line-no">'
@@ -111,9 +111,47 @@ function View () {
         let posDiv = document.getElementById('pos-div')
         posDiv.innerText = `${row+1},${col+1}`
     }
-    this.setHints = () => {
+    this.setHints = (lesson) => {
         let hintsDiv = document.getElementById('hints-content')
-        hintsDiv.innerHTML = unit1.lessons[this.currLesson].hints
+        hintsDiv.appendChild(this.hintMaker(lesson.hints))
+    }
+    this.hintMaker = (hints)  => {
+        const hintDiv = document.createElement('div')
+        const title = document.createElement('h4')
+        const text = document.createElement('p')
+        const additional = document.createElement('details')
+        const additionalSummary = document.createElement('summary')
+        const additionalText = document.createElement('p')
+        const resources = document.createElement('details')
+        const resourcesSummary = document.createElement('summary')
+        const resourcesText = document.createElement('p')
+
+        title.innerText = hints.title
+
+        text.innerHTML = hints.text
+
+        additionalSummary.innerText = 'Additional Info'
+        additionalText.innerHTML = hints.additional[0]
+        additional.appendChild(additionalSummary)
+        additional.appendChild(additionalText)
+
+        resourcesSummary.innerText = 'Additional Resources'
+        resourcesText.innerHTML = hints.resources[0]
+        resources.appendChild(resourcesSummary)
+        resources.appendChild(resourcesText)
+
+        hintDiv.appendChild(title)
+        hintDiv.appendChild(text)
+        hintDiv.appendChild(additional)
+        hintDiv.appendChild(resources)
+
+        return hintDiv
+    }
+    this.setCurriculum = (curriculumArray) => {
+        let lessonsDiv = document.getElementById('lessons')
+        for (let unit of curriculumArray) {
+            lessonsDiv.appendChild(unit)
+        }
     }
     this.finishNotice = () => {
         finishElement = document.createElement('div')
@@ -149,7 +187,7 @@ function View () {
             vimContent.classList.remove('blur')
         }
     }
-    this.addLineNos = (text) =>  {
+    this.addLineNos = (text) => {
         let spanPre = '<span class="line-no">'
         let spanPost = '</span>'
         let lineNosDiv = document.getElementById('line-nos')
